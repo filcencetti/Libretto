@@ -1,6 +1,7 @@
 import operator
 import flet
 from DAO.dao import LibrettoDAO
+from voto import Voto
 
 cfuTot = 180
 
@@ -228,7 +229,6 @@ def testVoto():
     mylib.append(v3)
     print(mylib)
     print((flet.Text(mylib)))
-
 
 if __name__ == "__main__":
     testVoto()
