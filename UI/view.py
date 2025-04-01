@@ -34,18 +34,17 @@ class View:
 
         self._ddVoto = ft.Dropdown(
             label ="Voto",
-            width = 120,
-        )
+            width = 120)
         self._fillDDVoto()
 
         self._dp = ft.DatePicker(
             first_date= datetime.datetime(2022,1,1),
             last_date= datetime.datetime(2026,12,31),
             on_change = lambda e: print(f"Giorno selezionato: {self._dp.value}"),
-            on_dismiss = lambda e: print("Data non selezionata")
-        )
+            on_dismiss = lambda e: print("Data non selezionata"))
+
         self._btnCal = ft.ElevatedButton("Pick date",
-                                            icon = ft.Icons.CALENDAR_MONTH,
+                                            icon = ft.icons.CALENDAR_MONTH,
                                             on_click= lambda _: self._page.open(self._dp)) # "_" e non "e" perché non usiamo
                                                                                           # l'argomento all'interno della lambda function
         self._btnAdd = ft.ElevatedButton("Aggiungi",

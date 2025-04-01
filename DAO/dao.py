@@ -1,19 +1,16 @@
-
-
 from DAO.dbConnect import DBConnect
 from voto import Voto
-# from dao.dbConnect import DBConnect
 
 class LibrettoDAO:
     #def __init__(self):
     #    self.dbConnect = DBConnect()
 
-    def getAllVoti(self):
+    @staticmethod #questo metodo non vede i parametri dell'istanza
+    def getAllVoti(): #tolgo self perché appunto non si riferiscono alle istanze delle classe
         cnx = DBConnect.getConnection()
         cursor = cnx.cursor(dictionary=True)
 
-        query = ("""select * 
-                 from voti """)
+        query = ("select * from voti ")
         cursor.execute(query)
         res = []
         for row in cursor:
@@ -30,7 +27,8 @@ class LibrettoDAO:
         cnx.close()
         return res
 
-    def addVoto(self, voto: Voto):
+    @staticmethod
+    def addVoto(voto: Voto):
         cnx = DBConnect.getConnection()
         cursor = cnx.cursor(dictionary=True)
 
@@ -44,7 +42,8 @@ class LibrettoDAO:
         cnx.close()
         return
 
-    def hasVoto(self,voto: Voto):
+    @staticmethod
+    def hasVoto(voto: Voto):
         cnx = DBConnect.getConnection()
 
         cursor = cnx.cursor()
@@ -53,7 +52,9 @@ class LibrettoDAO:
                  where v.materia = %s""")
         cursor.execute(query,(voto.materia,))
         res = cursor.fetchall()
+        cnx.close()
         return len(res) > 0
+
 
 if __name__ == "__main__":
     mydao = LibrettoDAO()

@@ -4,8 +4,6 @@ from DAO.dao import LibrettoDAO
 from voto import Voto
 
 cfuTot = 180
-
-
 class Libretto:
     def __init__(self, proprietario, voti=[]):
         self.proprietario = proprietario
@@ -14,7 +12,7 @@ class Libretto:
         self.fillLibretto()
 
     def fillLibretto(self):
-        allEsami = self.dao.getAllVoti()
+        allEsami = LibrettoDAO.getAllVoti()
         for e in allEsami:
             self.append(e) # metodo append
 
@@ -22,8 +20,8 @@ class Libretto:
         if (self.hasConfitto(voto) is False
                 and self.hasVoto(voto) is False):
             self.voti.append(voto)
-            if not self.dao.hasVoto(voto):
-                self.dao.addVoto(voto)
+            if not LibrettoDAO.hasVoto(voto):
+                LibrettoDAO.addVoto(voto)
         else:
             raise ValueError("Il voto è già presente")
 
@@ -108,7 +106,8 @@ class Libretto:
 
         for v in self.voti:
             if (v.materia == voto.materia
-                    and not (v.punteggio == voto.punteggio and v.lode == voto.lode)):
+                    and not (v.punteggio == voto.punteggio
+                             and v.lode == voto.lode)):
                 return True
         return False
 

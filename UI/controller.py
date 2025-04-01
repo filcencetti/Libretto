@@ -4,7 +4,6 @@ import flet as ft
 from scuola import Student
 from voto import Voto
 
-
 class Controller:
     def __init__(self, v: View):
         self._view = v
@@ -48,8 +47,7 @@ class Controller:
 
     def handleStampa(self, e):
         self._view._txtOut.controls.append(
-            ft.Text(str(self._model),color="black")
-        )
+            ft.Text(str(self._model),color="black"))
         self._view._page.update()
 
 
